@@ -1,6 +1,6 @@
 # Unit Testing & QA Report: Parking Slot Booking System
 
-## 0) Team Members
+## Team Members
 * **Student ID:** 0112310384
 * **Name:** Omor Faruck Ullas
 
