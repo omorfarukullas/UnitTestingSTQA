@@ -73,7 +73,7 @@
 | **PS07** | `ParkingSlot.isCompatible(...)` | CAR compatibility matrix | **PASS** | Compatible with REGULAR, LARGE. |
 | **PS08** | `ParkingSlot.isCompatible(...)` | BUS compatibility matrix | **PASS** | Compatible only with LARGE. |
 | **PS09** | `ParkingSlot.isCompatible(...)` | BICYCLE compatibility matrix | **PASS** | Compatible with all 4 slot types. |
-| **PS10** | `ParkingSlot.isCompatible(...)` | MICROCAR compatibility matrix | **PASS** | Compatible with COMPACT, REGULAR (**Defect D11**: missing break fall-through). |
+| **PS10** | `ParkingSlot.isCompatible(...)` | MICROCAR compatibility matrix | **PASS** | Compatible with COMPACT, REGULAR. |
 | **PS11** | `ParkingSlot.isCompatible(...)` | TRUCK compatibility check | **PASS** | **Defect D4**: Missing `case TRUCK:` returns `false` for all slots. |
 | **PS12** | `ParkingSlot.isAvailable(...)` | Availability on slot with 0 bookings | **PASS** | Returns `true`. |
 | **PS13** | `ParkingSlot.isAvailable(...)` | Window completely before existing booking | **PASS** | Returns `true` (no conflict). |
@@ -165,7 +165,6 @@
 | **D8** | `ParkingSystem.book(...)` | **Expected:** Bookings should only be recorded after payment transfer succeeds.<br>**Actual:** Booking added to system list before transfer; payment failure leaves an unpaid orphan booking. | Add booking to lists only **after** `vehicle.getWallet().transferFunds(...)` succeeds. |
 | **D9** | `ParkingSystem.completeBooking(...)` | **Expected:** Status should transition to COMPLETED only after 80% payout transfer succeeds.<br>**Actual:** Status marked COMPLETED before transfer; transfer failure leaves status corrupted without payout. | Execute `transferFunds(...)` first, and set status to COMPLETED only upon success. |
 | **D10** | `ParkingSystem.cancelBooking(...)` | **Expected:** Status should transition to CANCELLED only after 90% refund transfer succeeds.<br>**Actual:** Status marked CANCELLED before refund; transfer failure leaves user unrefunded. | Execute refund `transferFunds(...)` first, and set status to CANCELLED only upon success. |
-| **D11** | `ParkingSlot.isCompatible(...)` | **Expected:** Switch case `case MICROCAR:` should terminate with a `break;` statement.<br>**Actual:** Missing `break;` causes execution to fall through into `default: return false;` if slot is not COMPACT or REGULAR. | Add explicit `break;` at the end of `case MICROCAR:`. |
 
 ---
 
@@ -186,4 +185,4 @@
 ---
 
 ## D) Individual Contribution
-* **Omor Faruck Ullas (0112310384):** Designed and implemented 108 unit tests across all 5 domain classes (`WalletTest`, `VehicleTest`, `ParkingSlotTest`, `BookingTest`, `ParkingSystemTest`). Conducted defect detection isolating 11 functional and transactional bugs (D1–D11) with proposed fixes. Configured PITest in `pom.xml` across all target classes and performed mutant kill/survival analysis.
+* **Omor Faruck Ullas (0112310384):** Designed and implemented 108 unit tests across all 5 domain classes (`WalletTest`, `VehicleTest`, `ParkingSlotTest`, `BookingTest`, `ParkingSystemTest`). Conducted defect detection isolating 10 functional and transactional bugs (D1–D10) with proposed fixes. Configured PITest in `pom.xml` across all target classes and performed mutant kill/survival analysis.
