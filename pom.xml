@@ -36,6 +36,8 @@
             <param>parking.Wallet</param>
             <param>parking.ParkingSlot</param>
             <param>parking.ParkingSystem</param>
+            <param>parking.Booking</param>
+            <param>parking.Vehicle</param>
           </targetClasses>
           <targetTests>
             <param>parking.*</param>
